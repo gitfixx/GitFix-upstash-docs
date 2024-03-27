@@ -1,10 +1,10 @@
 ---
 title: "ksqlDB"
-description: "This tutorial shows how to integrate Upstash Kafka with ksqlDB"
+description: "This tutorial demonstrates how to integrate Upstash Kafka with ksqlDB"
 ---
 
 [ksqlDB](https://www.confluent.io/product/ksqldb) is a SQL interface for
-performing stream processing over the Kafka environment.
+performing stream processing over the Kafka environment
 
 ## Upstash Kafka Setup
 
@@ -14,9 +14,9 @@ Create a Kafka cluster using [Upstash Console](https://console.upstash.com) or
 
 ## ksqlDB Setup
 
-Upstash does not have a managed ksqlDB. Therefore, set up ksqlDB on a docker
+Upstash does not have a managed ksqlDB. Therefore, set up ksqlDB on a Docker
 container and replace UPSTASH-KAFKA-\* placeholders with your cluster
-information.
+information
 
 First, download and install [Docker](https://www.docker.com/).
 
@@ -50,7 +50,7 @@ services:
 ```
 
 Open your CLI, navigate to the folder that includes the docker-compose.yml file
-you created and start ksqlDB by running `docker-compose up`.
+you created, and start ksqlDB by running `docker-compose up`.
 
 When you check your Kafka cluster from
 [console](https://console.upstash.com/kafka), you will see new topics created
@@ -58,10 +58,10 @@ after you start ksqlDB.
 
 ## Streaming From One Topic to Another Topic
 
-Implementing a word count example project can be done with both ksqlDB CLI and
+Implementing a word count example project can be done with both the ksqlDB CLI and
 Java client. In both ways, it is going to be done by consecutive streams. The
-operations of the process will be as
-`receive input > split into array > convert to rows > count occurrences`.
+operations of the process will be as follows:
+`receive input > split into array > convert to rows > count occurrences`
 
 ### Using ksqlDB CLI
 
@@ -78,7 +78,7 @@ ksql> CREATE STREAM source_stream (sentence VARCHAR) WITH (kafka_topic='input', 
 ```
 
 Create the second stream, which reads from source_stream, splits the string to
-an array, and writes to the split_stream topic.
+an array, and writes to the split_stream topic
 
 ```
 ksql> CREATE STREAM split_stream AS SELECT regexp_split_to_array(sentence, ' ') as word_array FROM source_stream EMIT CHANGES;
@@ -91,8 +91,8 @@ converts word_array to rows, and writes to explode_stream.
 ksql> CREATE STREAM explode_stream AS SELECT explode(word_array) as words FROM split_stream EMIT CHANGES;
 ```
 
-Lastly, create a table, which will count the words’ occurrences and write it to
-the "OUTPUT" topic.
+Lastly, create a table, which will count the words' occurrences and write it to
+the "OUTPUT" topic
 
 ```
 ksql> CREATE TABLE output AS SELECT words as word, count(words) as occurrence FROM explode_stream GROUP BY words EMIT CHANGES;
@@ -129,11 +129,11 @@ SPLIT_STREAM  		| SPLIT_STREAM  				| KAFKA			| JSON  | false
 > with
 > [Add Ksqldb and Kafka into the Project](#add-ksqldb-and-kafka-into-the-project).
 
-Install Maven to your machine by following
+Install Maven on your machine by following
 [Maven Installation Guide](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
 
-Run `mvn –version` in a terminal or a command prompt to make sure you have Maven
-downloaded.
+Run `mvn –version` in a terminal or command prompt to make sure you have Maven
+installed
 
 It should print out the version of the Maven you have:
 
@@ -145,9 +145,9 @@ Default locale: en_US, platform encoding: Cp1250
 OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
 ```
 
-To create the Maven project;
+To create the Maven project:
 
-Go into the folder that you want to create the project in your terminal or
+Go into the folder where you want to create the project in your terminal or
 command prompt by running `cd <folder path>`
 
 Run the following command:
@@ -211,7 +211,7 @@ CompletableFuture<ExecuteStatementResult> result =
 System.out.println(result);
 ```
 
-Create the second stream, which reads from source_stream, split the string to an
+Create the second stream, which reads from source_stream, splits the string into an
 array, and writes to the split_stream topic.
 
 ```java
@@ -246,24 +246,24 @@ CompletableFuture<ExecuteStatementResult> result3 =
 
 ## Results
 
-The word count stream we created above is taking input sentences in JSON format
-from the "input" topic and sends word count results to the "OUTPUT" topic.
+The word count stream we created above takes input sentences in JSON format
+from the "input" topic and sends word count results to the "OUTPUT" topic
 
 You can both send input and observe the output on
 [console](https://console.upstash.com/kafka).
 
 Send the input sentence to the "input" topic. The key can be a random string,
 but since we defined "sentence" as a field while creating the `source_stream`,
-the value must be a JSON that includes “sentence” as a key for this use case:
+the value must be a JSON that includes "sentence" as a key for this use case:
 
 ```json
 {
-“sentence”: “This is an example sentence”
+"sentence": "This is an example sentence"
 }
 ```
 
-Once you send this message to "input" topic, you can observe the result at
-"OUTPUT" topic as following:
+Once you send this message to the "input" topic, you can observe the result at
+"OUTPUT" topic as follows:
 
 ```
 Timestamp				Key			Value
