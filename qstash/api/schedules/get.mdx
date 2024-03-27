@@ -23,10 +23,10 @@ authMethod: "bearer"
   The cron expression used to schedule the message.
 </ResponseField>
 <ResponseField name="callerIP" type="string" required>
-    IP address where this schedule created from.
+    The IP address from which this schedule was created.
 </ResponseField>
 <ResponseField name="destination" type="string" required>
-  Url or topic name
+  The URL or topic name.
 </ResponseField>
 <ResponseField name="method" type="string" required>
   The HTTP method to use for the message.
@@ -44,7 +44,7 @@ authMethod: "bearer"
   The delay in seconds before the message is delivered.
 </ResponseField>
 <ResponseField name="callback" type="string">
-  The url where we send a callback to after the message is delivered
+  The URL to which we send a callback after the message is delivered.
 </ResponseField>
 
 <RequestExample>
