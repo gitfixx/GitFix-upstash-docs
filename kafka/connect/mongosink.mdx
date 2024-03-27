@@ -2,9 +2,9 @@
 title: MongoDB Sink Connector
 ---
 
-MongoDB Sink Connector allows you to continuously store the data that appears in your
-Kafka Topics to MongoDB database. In this guide, we will walk you through
-creating DB Sink Connector with MongoDB database to Upstash Kafka.
+The MongoDB Sink Connector allows you to continuously store the data that appears in your
+Kafka Topics in a MongoDB database. In this guide, we will walk you through
+creating a DB Sink Connector with a MongoDB database for Upstash Kafka.
 
 ## Get Started
 
@@ -24,25 +24,25 @@ Connector** button.
   <img src="/img/kafka/connect/connector.png" width="100%" />
 </Frame>
 
-Choose **MongoDB Connector Sink**
+Choose the **MongoDB Connector Sink**
 
 <Frame>
   <img src="/img/kafka/connect/mongo/sink/1connector.png" />
 </Frame>
 
-Enter a connector name and MongoDB URI(connection string). Select single or
+Enter a connector name and MongoDB URI (connection string). Select single or
 multiple topics from existing topics to read data from.
 
-Enter Database and Collection that the selected topics are written into. We
+Enter the Database and Collection where the selected topics will be written. We
 entered "new" as Database and "test" as Collection. It is not required for this
-database and collection to exist on MongoDB database. They will be created
+database and collection to exist in the MongoDB database. They will be created
 automatically.
 
 <Frame>
   <img src="/img/kafka/connect/mongo/sink/2config.png" />
 </Frame>
 
-The advanced screen is for any other configuration that the selected connector
+The advanced screen allows for any other configuration that the selected connector
 supports. At the top of this screen, you can find a link to related
 documentation. We can proceed with what we have and click the **Connect** button
 directly.
@@ -51,5 +51,5 @@ directly.
   <img src="/img/kafka/connect/mongo/sink/3advanced.png" />
 </Frame>
 
-Congratulations! You have created your MongoDB Sink Connector. As you put data
+Congratulations! You have successfully created your MongoDB Sink Connector. As you put data
 into your selected topics, the data will be written into your MongoDB database.
