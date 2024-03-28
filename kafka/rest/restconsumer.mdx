@@ -17,11 +17,11 @@ partitions from the Kafka topic. This automatic offset management simplifies the
 consumption process and facilitates efficient and parallel message processing
 across the consumer group.
 
-We call the first one as **Fetch API** and the second one as **Consume API**.
+We call the first one **Fetch API** and the second one **Consume API**.
 Consume API has some additional methods if you wish to commit offsets manually.
 
-Both Fetch API and Consume API return array of messages as JSON. Message
-structure is as following:
+Both Fetch API and Consume API return an array of messages as JSON. The message
+structure is as follows:
 
 ```ts
 Message {
@@ -63,7 +63,7 @@ It's possible to send a fetch request for only a single
 `<topic, partition, offset>` or a set of them using `topicPartitionOffsets`.
 
 `timeout` field defines the time to wait at most for the fetch request in
-milliseconds. It's optional and its default value 1000.
+milliseconds. It's optional and its default value is 1000.
 
 - Fetch from a single `<topic, partition, offset>`:
 
@@ -112,7 +112,7 @@ offsets automatically. Consume API has two variants:
 
 `$CONSUMER_GROUP` is the name of the consumer group which is used as
 [Kafka consumer group id](https://kafka.apache.org/documentation/#consumerconfigs_group.id).
-`$INSTANCE_ID` is used identify Kafka consumer instances in the same consumer
+`$INSTANCE_ID` is used to identify Kafka consumer instances in the same consumer
 group. It's used as
 [Kafka consumer instance id](https://kafka.apache.org/documentation/#consumerconfigs_group.instance.id).
 Each consumer instance is handled by a separate consumer client.
@@ -129,7 +129,7 @@ ConsumeRequest{
 ```
 
 It's possible to send a consume request for only a single `topic` or multiple
-`topics`. `timeout` field defines the time to wait at most for the consume
+`topics`. The `timeout` field defines the maximum time to wait for the consume
 request in milliseconds. It's optional and its default value is `1000`.
 
 Consumer group instances will be closed after some idle time. So consume
@@ -137,9 +137,9 @@ requests should be sent periodically to keep them alive.
 
 #### Request Headers
 
-There are three request headers to configure Kafka consumer instance. These
-headers are only required for the very first request which creates and
-initializes the consumer but it's fine to send them with every request and has
+There are three request headers to configure the Kafka consumer instance. These
+headers are only required for the very first request, which creates and
+initializes the consumer, but it's fine to send them with every request and has
 no further effect.
 
 - `Kafka-Enable-Auto-Commit`: If true, the consumer's offset will be
@@ -153,7 +153,7 @@ no further effect.
   is `latest`.
   - `earliest`: Automatically reset the offset to the earliest offset
   - `latest`: Automatically reset the offset to the latest offset
-  - `none`: Throw exception to the consumer if no previous offset is found for
+  - `none`: Throw an exception to the consumer if no previous offset is found for
     the consumer's group.
 
 <Tip>
@@ -163,9 +163,9 @@ no further effect.
 
 <Warning>
   The first time a consumer is created, it needs to figure out the group
-  coordinator by asking the Kafka brokers and joins the consumer group. This
+  coordinator by asking the Kafka brokers and joining the consumer group. This
   process takes some time to complete. That's why when a consumer instance is
-  created first time, it may return empty messages until consumer group
+  created for the first time, it may return empty messages until consumer group
   coordination is completed.
 </Warning>
 
@@ -222,7 +222,7 @@ curl https://tops-stingray-7863-eu1-rest-kafka.upstash.io/consume/mygroup/mycons
 ```
 
 <Info>
-  Maximum number of consumer group instances is limited to total partition count
+  The maximum number of consumer group instances is limited to the total partition count
   of all topics.
 </Info>
 
